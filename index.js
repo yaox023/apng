@@ -222,12 +222,16 @@ function loadImgElement(frame) {
 }
 
 async function main() {
+  // 1. load APNG image
   const bytes = await loadImg(targetPath);
 
+  // 2. parse the image
   const apng = parseApng(bytes);
 
+  // 3. load it into html img element
   await Promise.all(apng.frames.map(loadImgElement));
 
+  // 4. play it on canvas
   play(apng);
 }
 
